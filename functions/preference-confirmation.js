@@ -13,19 +13,25 @@ const AT_CONFIRMATION_TABLE = process.env.AT_CONFIRMATION_TABLE;
 const algorithm = "aes-256-cbc";
 const ENCRYPTION_KEY = process.env.CIPHER_ENCRYPTION_KEY;
 
-// Save user to Airtable
-const save_user = async (email) => {
+// Saves the user to Airtable
+function save_user(email_address) {
+  // The Promise is really important here. Lambda functions (which Netlify runs behind the scenes)
+  // will terminate soon as a the code "returns". A promise tells the code to wait until it gets
+  // a response, at which point it can return that response/result.
   return new Promise((resolve, reject) => {
     airtable.configure({apiKey: AT_API_KEY});
-
     base = airtable.base(AT_BASE);
-    base(AT_CONFIRMATION_TABLE).create({"Email": email}, err => {
-      if (err) return reject(err);
 
-      resolve();
-    });
-  });
-};
+    base(AT_CONFIRMATION_TABLE).create([{"fields": {"Email": email_address}}], function(err, records) {
+      if (err) {
+        reject(err);
+        return;
+      }
+      console.log('Should resolve records')
+      resolve(records);
+    })
+  })
+}
 
 // Decrypt secure URL
 function decrypt(text){
@@ -39,18 +45,32 @@ function decrypt(text){
   return decrypted.toString();
 }
 
-exports.handler = async function(event, context) {
-  encrypted_text = event.path.split("/").pop();
+// Just means less repeated code
+function error_handler(err) {
+  console.error(err)
+  return {
+    statusCode: 500,
+    body: "Oops! Something went wrong."
+  }
+}
 
-  // Try / catch would be nice
+exports.handler = async function(event, context) {
+  // Decrypt the hash into the raw email address
+  encrypted_text = event.path.split("/").pop();
   email = decrypt(encrypted_text);
 
-  await save_user(email);
+  // Prepare the promise
+  save_user = save_user(email);
 
-  return {
-    statusCode: 301,
-    headers: {
-      Location: '/preference-confirmation-thanks/'
+  // Save to Airtable and, if successful, return the function
+  return save_user
+  .then(() => {
+    return {
+      statusCode: 301,
+      headers: {
+        Location: '/preference-confirmation-thanks/'
+      }
     }
-  }
+  })
+  .catch(err => error_handler(err));
 }
