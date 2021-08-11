@@ -36,7 +36,7 @@ const save_user = async (email) => {
       resolve();
     });
   });
-};
+}
 
 // Send confirmation email via your preferred service. Here we use Vero Workflows.
 const send_confirmation_email = async (email_address, confirmation_url) => {
