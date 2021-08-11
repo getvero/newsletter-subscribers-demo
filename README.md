@@ -19,6 +19,7 @@ List of `ENV` vars you'll need:
 - `CIPHER_ENCRYPTION_KEY` — a random 32 character string ([generate one here](https://www.random.org/strings/))
 - `AT_API_KEY`
 - `AT_BASE`
-- `AT_TABLE`
+- `AT_SUBSCRIPTION_TABLE`
+- `AT_CONFIRMATION_TABLE`
 
 
