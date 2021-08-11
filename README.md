@@ -16,8 +16,7 @@ You'll need to set the following environment (`ENV`) variables. If hosting in pr
 
 List of `ENV` vars you'll need:
 
-- `VERO_AUTH_TOKEN`
-- `CIPHER_ENCRYPTION_KEY`
+- `CIPHER_ENCRYPTION_KEY` — a random 32 character string ([generate one here](https://www.random.org/strings/))
 - `AT_API_KEY`
 - `AT_BASE`
 - `AT_TABLE`

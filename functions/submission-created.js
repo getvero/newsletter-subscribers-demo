@@ -2,8 +2,7 @@ const crypto = require("crypto");
 const fetch = require("node-fetch");
 const airtable = require('airtable');
 
-// Setup Vero and Airtable
-const VERO_AUTH_TOKEN = process.env.VERO_AUTH_TOKEN;
+// Setup Airtable
 const AT_API_KEY = process.env.AT_API_KEY;
 const AT_BASE = process.env.AT_BASE;
 const AT_SUBSCRIPTION_TABLE = process.env.AT_SUBSCRIPTION_TABLE;
@@ -12,6 +11,9 @@ const AT_CONFIRMATION_TABLE = process.env.AT_CONFIRMATION_TABLE;
 // Setup cipher stuff
 const algorithm = "aes-256-cbc";
 const ENCRYPTION_KEY = process.env.CIPHER_ENCRYPTION_KEY;
+
+// (Optional) Setup Vero if using that for emails
+// const VERO_AUTH_TOKEN = process.env.VERO_AUTH_TOKEN;
 
 function encrypt(text) {
   init_vector = crypto.randomBytes(16);
