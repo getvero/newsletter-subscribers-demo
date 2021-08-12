@@ -60,10 +60,10 @@ exports.handler = async function(event, context) {
   email = decrypt(encrypted_text);
 
   // Prepare the promise
-  save_user = save_user(email);
+  save_user_promise = save_user(email);
 
   // Save to Airtable and, if successful, return the function
-  return save_user
+  return save_user_promise
   .then(() => {
     return {
       statusCode: 301,
