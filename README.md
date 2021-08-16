@@ -1,4 +1,4 @@
-# Netlify + Airtable + [Vero Newsletters](https://www.getvero.com/newsletters/) template
+# Netlify + Airtable + [Vero Newsletters](https://www.getvero.com/newsletters/?utm_source=github&utm_medium=social) template
 
 You can use this template locally with the [Netlify CLI](https://docs.netlify.com/cli/get-started/) or in production with Netlify.
 
@@ -10,7 +10,7 @@ When submitted we store the submission in Airtable. We also generate a secure UR
 
 Once submitted, grab the confirmation URL, enter it in your browser and the double opt-in is complete! At this point we store the confirmation in Airtable.
 
-This enables us to store and maintain newsletter subscribers in an Airtable Base for integration with [Vero Newsletters](https://www.getvero.com/newsletters/)
+This enables us to store and maintain newsletter subscribers in an Airtable Base for integration with [Vero Newsletters](https://www.getvero.com/newsletters/?utm_source=github&utm_medium=social&utm_campaign=github_profile)
 
 ## Setup API keys
 
@@ -18,7 +18,7 @@ You'll need to set the following environment (`ENV`) variables. If hosting in pr
 
 List of `ENV` vars you'll need:
 
-- `VERO_AUTH_TOKEN` - if using [Vero Workflows](https://www.getvero.com/workflows/) to send the automated confirmation email.
+- `VERO_AUTH_TOKEN` - if using [Vero Workflows](https://www.getvero.com/workflows/?utm_source=github&utm_medium=social&utm_campaign=github_profile) to send the automated confirmation email.
 - `CIPHER_ENCRYPTION_KEY` — a random 32 character string ([generate one here](https://www.random.org/strings/))
 - `AT_API_KEY`
 - `AT_BASE`
